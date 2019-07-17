@@ -27,7 +27,12 @@ podTemplate(label: 'jnlp', containers: [
       // BUILD_DATE_TIME defined as a build parameter in Jenkins
       def imageTag = "eu.gcr.io/${project}/${appName}:${BUILD_DATE_TIME}"
       def mvn_version = 'M3'
-      
+     agent {
+        docker {
+            image "${imageTag}"
+            //args '-p 3000:3000'
+        }
+    }
          
       stage('Checkout') {
         checkout scm
@@ -47,8 +52,9 @@ podTemplate(label: 'jnlp', containers: [
 
       stage('Bake Docker Image') {
           //docker.build "${imageTag}"
-          def customImage = docker.build("${imageTag}")
+          //def customImage = docker.build("${imageTag}")
           //sh("docker build -t ${imageTag} .")
+          echo "Docker image backed"
       }
 
       stage('Push images to GCR') {

@@ -44,7 +44,8 @@ podTemplate(label: 'jnlp', containers: [
       }
 
       stage('Bake Docker Image') {
-        sh("docker build -t ${imageTag} .")
+          docker.build "${imageTag}"
+          //sh("docker build -t ${imageTag} .")
       }
 
       stage('Push images to GCR') {

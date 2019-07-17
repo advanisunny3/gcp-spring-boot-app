@@ -1,6 +1,6 @@
-podTemplate(label: 'jnlp', containers: [
+podTemplate(label: 'jnlp-123456', containers: [
     containerTemplate(
-          name: 'jnlp',
+          name: 'jnlp-123456',
           image: 'eggsy84/gcp-jenkins-slave-k8s-seed:latest',
           ttyEnabled: false,
           command: '',
@@ -18,7 +18,7 @@ podTemplate(label: 'jnlp', containers: [
 
 {
 
-  node('jnlp') {
+  node('jnlp-123456') {
 
       // Project name will be passed in as a parameter
       def project = "${GCP_PROJECT_NAME}"

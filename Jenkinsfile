@@ -27,7 +27,9 @@ podTemplate(label: 'jnlp', containers: [
       // BUILD_DATE_TIME defined as a build parameter in Jenkins
       def imageTag = "eu.gcr.io/${project}/${appName}:${BUILD_DATE_TIME}"
       def mvn_version = 'M3'
-         
+      agent {
+        docker { image 'node:7-alpine' }
+      }
       stage('Checkout') {
         checkout scm
       }

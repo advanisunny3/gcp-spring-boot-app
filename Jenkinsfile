@@ -48,7 +48,7 @@ podTemplate(label: 'jnlp', containers: [
           //docker.build "${imageTag}"
           //def customImage = docker.build("${imageTag}")
           //sh("docker build -t ${imageTag} .")
-          git 'git@diyvb:repos/dockerResources.git'
+          git "https://github.com/advanisunny3/gcp-spring-boot-app.git"
 
         // build our docker image
         myImg = docker.build 'my-image:snapshot'

@@ -26,17 +26,21 @@ podTemplate(label: 'jnlp', containers: [
 
       // BUILD_DATE_TIME defined as a build parameter in Jenkins
       def imageTag = "eu.gcr.io/${project}/${appName}:${BUILD_DATE_TIME}"
-
+      def mvn_version = 'M3'
       stage('Checkout') {
         checkout scm
       }
 
       stage('Compile') {
-        sh "mvn clean compile"
+          withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+            sh "mvn clean compile"
+          }
       }
 
       stage('Test and Package') {
-        sh "mvn package"
+        withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+          sh "mvn package"
+        }
       }
 
       stage('Bake Docker Image') {

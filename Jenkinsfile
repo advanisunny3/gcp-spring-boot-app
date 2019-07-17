@@ -27,12 +27,6 @@ podTemplate(label: 'jnlp', containers: [
       // BUILD_DATE_TIME defined as a build parameter in Jenkins
       def imageTag = "eu.gcr.io/${project}/${appName}:${BUILD_DATE_TIME}"
       def mvn_version = 'M3'
-     agent {
-        docker {
-            image "${imageTag}"
-            //args '-p 3000:3000'
-        }
-    }
          
       stage('Checkout') {
         checkout scm
@@ -54,6 +48,7 @@ podTemplate(label: 'jnlp', containers: [
           //docker.build "${imageTag}"
           //def customImage = docker.build("${imageTag}")
           //sh("docker build -t ${imageTag} .")
+          myImg = docker.build 'my-image:snapshot'
           echo "Docker image backed"
       }
 

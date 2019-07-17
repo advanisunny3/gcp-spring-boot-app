@@ -28,11 +28,7 @@ podTemplate(label: 'jnlp', containers: [
       def imageTag = "eu.gcr.io/${project}/${appName}:${BUILD_DATE_TIME}"
       def mvn_version = 'M3'
       
-      stage('Initialize'){
-        def dockerHome = tool 'docker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
-      }
-      
+         
       stage('Checkout') {
         checkout scm
       }
